@@ -4,7 +4,7 @@ from django.db import models
 class Question(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=400)
-    pub_date = models.DateField('date published')
+    date = models.CharField(max_length=10)
     type_choices = (
         ('General', 'General'),
         ('Advance', 'Advance'),

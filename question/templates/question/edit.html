@@ -20,39 +20,66 @@
     <label class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-4">
         <label for="id_title"></label><input type="text" name="title" id="id_title" required maxlength="200" value="{{ question.title }}"/>
+          {% if form.title.errors %}
+            <ul>
+              {% for error in form.title.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Description</label>
     <div class="col-sm-4">
-         <label for="id_description"></label><input type="text" name="description" id="id_description" required maxlength="400" value="{{ question.description }}" />
+        <label for="id_description"></label><textarea name="description" id="id_description" required maxlength="400" value="{{ question.description }}">{{ question.description }}</textarea>
+         {% if form.description.errors %}
+            <ul>
+              {% for error in form.description.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Publication Date:</label>
     <div class="col-sm-4">
-         <label for="id_pub_date"></label><input type="text" name="pub_date" id="id_pub_date" required maxlength="100" value="{{ question.pub_date }}" />
+         <label for="id_date"></label><input type="text" name="date" id="id_date" required maxlength="100" value="{{ question.date }}" />
+         {% if form.date.errors %}
+            <ul>
+              {% for error in form.date.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
     </div>
   </div>
-    <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Type</label>
-    <div class="col-sm-4">
-        <label for="id_type"></label><input type="text" name="type" id="id_type" required maxlength="200" value="{{ question.type }}" />
-    </div>
-    </div>
+{#    <div class="form-group row">#}
+{#    <label class="col-sm-2 col-form-label">Type</label>#}
+{#    <div class="col-sm-4">#}
+{#        <label for="id_type"></label><input type="text" name="type" id="id_type" required maxlength="200" value="{{ question.type }}" />#}
+{#    </div>#}
+{#    </div>#}
+        <div class = "form-group">
+          <label for = "{{ id_type }}" class = "col-sm-2 control-label">Type</label>
+          <div class = "col-sm-10">
+              <select id="id_type" name="type" class = "form-control">
+                  <option value = "{{ question.type }}" selected>{{ question.type }}</option>
+                  {% for type in form.type.field.choices %}
+                      {% if not question.type == type.0 %}
+                  <option value = "{{type.0}}">{{ type.1 }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>
+          </div>
+      </div>
       <div class="form-group row">
       <label class="col-sm-1 col-form-label"></label>
       <div class = "col-sm-4">
       <button type="submit" class="btn btn-success">Update</button>
     </div>
-      <div>
-          {% if form.errors %}
-                {% for form in form.errors %}
-                    <p>There is an error!!</p>
-{#                    <a class = "btn btn-primary" href="edit.html">Go Back</a>#}
-                {% endfor %}
-          {% endif %}
-      </div>
+
    </div>
     </div>
 </form>
