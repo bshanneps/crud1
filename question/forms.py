@@ -47,8 +47,10 @@ class QuestionForm(forms.ModelForm):
         else:
             return date
 
-    # def clean_type(self):
-    #     type = self.cleaned_data.get("type")
-    #     if not "General" and "Advance" and "Professional" in type:
-    #         raise forms.ValidationError("No choice defined")
-    #     return type
+    def clean_type(self):
+        type = self.cleaned_data.get("type")
+        if not "General" and "Advance" and "Professional" in type:
+            raise forms.ValidationError("No choice defined")
+        else:
+            return type
+

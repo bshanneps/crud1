@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static '' %}"/>
 </head>
 <body>
-<form method="POST" class="post-form" action="/create">
+<form method="POST" class="post-form" action="{% url 'create' %}">
         {% csrf_token %}
     <div class="container">
 <br>
@@ -60,6 +60,13 @@
     <label class="col-sm-2 col-form-label">Type</label>
     <div class="col-sm-4">
       {{ form.type }}
+        {% if form.type.errors %}
+            <ul>
+              {% for error in form.type.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
     </div>
   </div>
     <div class="form-group row">
